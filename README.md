@@ -4,7 +4,7 @@ My nephews wanted Minecraft with guns. I opened a blank HTML file, pointed Claud
 
 **[Play Now](https://tront.xyz/craftmine/play/)** | **[Landing Page](https://tront.xyz/craftmine/)** | **[Blog Post](https://blog.tront.xyz/posts/craftmine/)**
 
-![CraftMine — snowy biome with trees at sunrise](screenshots/craftmine.png)
+![CraftMine — snowy biome with trees at sunrise](screenshots/craftmine-og.png)
 
 ## What is this
 

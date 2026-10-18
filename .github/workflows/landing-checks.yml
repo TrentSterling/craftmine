@@ -1,0 +1,80 @@
+name: CraftMine landing checks
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - index.html
+      - play/**
+      - screenshots/**
+      - tools/landing/**
+      - .github/workflows/landing-checks.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: craftmine-landing-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  landing:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    env:
+      LANDING_BASELINE_ROOT: ${{ github.workspace }}/.local/baseline
+      LANDING_SHARED_ROOT: ${{ github.workspace }}/.local/shared
+      LANDING_BLOG_ROOT: ${{ github.workspace }}/.local/blog
+      LANDING_SCREENSHOTS: ${{ github.workspace }}/.local/review
+      LANDING_BROWSER_EXECUTABLE: /opt/google/chrome/chrome
+    steps:
+      - name: Check out the exact PR head
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - name: Check out the actual PR base
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          path: .local/baseline
+          persist-credentials: false
+      - name: Read the released shared assets
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          repository: TrentSterling/trentsterling.github.io
+          ref: 75ff9c1b365e9adb3d7e47c819d5b05c92bff7b2
+          path: .local/shared
+          persist-credentials: false
+      - name: Read the released blog logo
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          repository: TrentSterling/blog
+          ref: 17cc9da9db34681410424bf8d2ef9797939bb3a4
+          path: .local/blog
+          persist-credentials: false
+      - name: Set up Node
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
+        with:
+          node-version: '24'
+          package-manager-cache: false
+      - name: Install pinned test tooling and official Chrome
+        run: |
+          npm install --prefix "$RUNNER_TEMP/landing-tests" --no-save --package-lock=false --ignore-scripts playwright@1.62.0 pngjs@7.0.0
+          node "$RUNNER_TEMP/landing-tests/node_modules/playwright/cli.js" install --with-deps chrome
+          echo "NODE_PATH=$RUNNER_TEMP/landing-tests/node_modules" >> "$GITHUB_ENV"
+      - name: Check exact landing additions and complete runtime preservation
+        run: node --test tools/landing/test.cjs
+      - name: Check links, focus, wrapping, no-JS and unchanged appearance
+        run: timeout 180s node tools/landing/browser.cjs
+      - name: Save review evidence
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: craftmine-landing-review
+          path: |
+            .local/review/*.json
+            .local/review/*.png
+          include-hidden-files: true
+          retention-days: 7
+          if-no-files-found: error

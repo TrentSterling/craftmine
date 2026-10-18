@@ -1,0 +1,34 @@
+{
+  "baseline": "eea58242c0e510aa316d2d7eb2fa31fe6f9a11e9",
+  "sharedSource": "75ff9c1b365e9adb3d7e47c819d5b05c92bff7b2",
+  "blogSource": "17cc9da9db34681410424bf8d2ef9797939bb3a4",
+  "changes": [
+    {
+      "before": "    <meta property=\"og:type\" content=\"website\">",
+      "after": "    <link rel=\"canonical\" href=\"https://tront.xyz/craftmine/\">\n    <meta property=\"og:type\" content=\"website\">"
+    },
+    {
+      "before": "\"author\":{\"@type\":\"Person\",\"name\":\"Trent Sterling\",\"url\":\"https://tront.xyz\"}",
+      "after": "\"author\":{\"@type\":\"Person\",\"@id\":\"https://tront.xyz/#trent-sterling\",\"name\":\"Trent Sterling\",\"url\":\"https://tront.xyz\"}"
+    },
+    {
+      "before": "Seed-based lofi music system. Every world gets its own soundtrack generated from the world seed.",
+      "after": "Seed-based <a href=\"https://tront.xyz/lofigen/\">lofi music system</a>. Every world gets its own soundtrack generated from the world seed."
+    },
+    {
+      "before": "                <a href=\"https://tront.xyz/discord/\" target=\"_blank\">Discord</a>",
+      "after": "                <a href=\"https://tront.xyz/discord/\" target=\"_blank\">Discord</a>\n                <span class=\"footer-sep\">|</span>\n                <a href=\"https://tront.xyz/blog/posts/craftmine/\">CraftMine devlog</a>"
+    }
+  ],
+  "protectedFiles": {
+    "CLAUDE.md": "ccf684e56b3656041532f53d10f1c8d57a0cafa46de7beb8f3c4d1e04b2a446a",
+    "README.md": "d5c5adb80ed9cbf363fa20d5f5ecf0723bb68dd7205355016dab805b1529459f",
+    "TODO.md": "5278bab2906e1a1d6c35f56aa2bca344ec4ed3b89da0943bc0600f07404b217d",
+    "play/index.html": "bc077ac12cac414ddd1dbb32ec10907dcd8cf4f69727f1e8e92f818ac884410e",
+    "screenshots/craftmine-landscape.png": "595b65684aa124ae3251b2acc5d079bc3541de580cf8e00f28e15451b7e328bd",
+    "screenshots/craftmine-mountains.png": "fe1448d75347280a14edfec775daf7e823e42178d4c2b5f725e1e582170bbb66",
+    "screenshots/craftmine-og.png": "6d5c304b5eecb9fe2c849b2221113e27a03b9b84559de89b812844e09fb60e0d",
+    "screenshots/craftmine-snow-biome.png": "76078e95f2cf562b89d11df06c46fe4ff72202808e52c6f1c6be710336f3b869",
+    "screenshots/craftmine.png": "76078e95f2cf562b89d11df06c46fe4ff72202808e52c6f1c6be710336f3b869"
+  }
+}

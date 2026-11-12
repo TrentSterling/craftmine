@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:peerjs.com)",
+      "WebFetch(domain:github.com)",
+      "Bash(start index.html)",
+      "Bash(git status:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(start \"\" \"C:\\\\Github\\\\CraftMine\\\\index.html\")"
+    ]
+  }
+}
